@@ -20,22 +20,22 @@
                 axios.defaults.headers.get['Content-Type'] = 'application/json;charset=UTF-8"';
                 
                 // 添加请求拦截器
-                axios.interceptors.request.use(function (config) {
-                    // 在发送请求之前做些什么
-                    return {...config, auth: { username: 'lpf-fpl', password: code }};
-                }, function (error) {
+   //             axios.interceptors.request.use(function (config) {
+   //                 // 在发送请求之前做些什么
+   //                 return {...config, auth: { username: 'lpf-fpl', password: code }};
+   //             }, function (error) {
                     // 对请求错误做些什么
-                    return Promise.reject(error);
-                });
+   //                 return Promise.reject(error);
+   //             });
                 
                 axios({
                   method: 'get',
-                  url: `https://api.github.com/user`,
+                  url: `https://api.github.com/users/solomonxie`,
                 });
                 
                 axios({
                   method: 'post',
-                  url: `https://api.github.com/user`,
+                  url: `https://api.github.com/users/solomonxie`,
                 });
             })
         </script>
