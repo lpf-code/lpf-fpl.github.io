@@ -19,7 +19,7 @@
                 axios.defaults.headers.common['Authorization'] = `token ${code}`;
                 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8"';
 
-                const result = await axios({
+                axios({
                   method: 'get',
                   url: `https://api.github.com/user`,
                 });
