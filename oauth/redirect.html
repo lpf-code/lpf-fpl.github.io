@@ -8,7 +8,8 @@
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     </head>
     <body>
-        <script>
+        <script type="module">
+            import { Octokit } from "https://cdn.skypack.dev/@octokit/core";
             $(function() {
                 function getQueryParam() {
                     return location.search.slice(1) &&   location.search.slice(1).split("&").reduce(function(t, v){ var arr = v.split("="); t[arr[0]] = arr[1]; return t}, {})
@@ -27,6 +28,14 @@
                     // 对请求错误做些什么
    //                 return Promise.reject(error);
    //             });
+                
+                // Create a personal access token at https://github.com/settings/tokens/new?scopes=repo
+var octokit = new Octokit({ auth: code });
+
+octokit.request('GET /user')
+                var octokit = new Octokit({ auth: `token ${code}` });
+
+octokit.request('GET /user')
                 
                 axios({
                   method: 'get',
