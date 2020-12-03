@@ -8,8 +8,7 @@
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     </head>
     <body>
-        <script type="module">
-            import { Octokit } from "https://cdn.skypack.dev/@octokit/core";
+        <script>
             $( async function() {
                 function getQueryParam() {
                     return location.search.slice(1) &&   location.search.slice(1).split("&").reduce(function(t, v){ var arr = v.split("="); t[arr[0]] = arr[1]; return t}, {})
@@ -22,17 +21,17 @@
                 var  clientSecret = "c4fee8c0976051ac7d476b4acda4ce0b7862d3e9"
                 
                const tokenResponse = await axios({
-  method: 'post',
-  url: 'https://github.com/login/oauth/access_token?' +
-    `client_id=${clientID}&` +
-    `client_secret=${clientSecret}&` +
-    `code=${requestToken}`,
-  headers: {
-    accept: 'application/json'
-  }
-});
+                    method: 'post',
+                    url: 'https://github.com/login/oauth/access_token?' +
+                        `client_id=${clientID}&` +
+                        `client_secret=${clientSecret}&` +
+                        `code=${requestToken}`,
+                    headers: {
+                        accept: 'application/json'
+                    }
+                });
                 
-                                axios.defaults.headers.common['Authorization'] = `token ${tokenResponse.data.access_token;}`;
+                axios.defaults.headers.common['Authorization'] = `token ${tokenResponse.data.access_token;}`;
                 
                 axios({
                   method: 'get',
