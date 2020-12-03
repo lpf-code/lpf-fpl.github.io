@@ -10,32 +10,29 @@
     <body>
         <script type="module">
             import { Octokit } from "https://cdn.skypack.dev/@octokit/core";
-            $(function() {
+            $( async function() {
                 function getQueryParam() {
                     return location.search.slice(1) &&   location.search.slice(1).split("&").reduce(function(t, v){ var arr = v.split("="); t[arr[0]] = arr[1]; return t}, {})
                 }
-                var code = getQueryParam().code
-
-                axios.defaults.headers.common['Authorization'] = `token ${code}`;
+                var requestToken = getQueryParam().code
                 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8"';
                 axios.defaults.headers.get['Content-Type'] = 'application/json;charset=UTF-8"';
                 
-                // 添加请求拦截器
-   //             axios.interceptors.request.use(function (config) {
-   //                 // 在发送请求之前做些什么
-   //                 return {...config, auth: { username: 'lpf-fpl', password: code }};
-   //             }, function (error) {
-                    // 对请求错误做些什么
-   //                 return Promise.reject(error);
-   //             });
+                var  clientID = "f5b04c55a3df85a39722";
+                var  clientSecret = "c4fee8c0976051ac7d476b4acda4ce0b7862d3e9"
                 
-                // Create a personal access token at https://github.com/settings/tokens/new?scopes=repo
-var octokit = new Octokit({ auth: code });
-
-octokit.request('GET /user')
-                var octokit = new Octokit({ auth: `token ${code}` });
-
-octokit.request('GET /user')
+               const tokenResponse = await axios({
+  method: 'post',
+  url: 'https://github.com/login/oauth/access_token?' +
+    `client_id=${clientID}&` +
+    `client_secret=${clientSecret}&` +
+    `code=${requestToken}`,
+  headers: {
+    accept: 'application/json'
+  }
+});
+                
+                                axios.defaults.headers.common['Authorization'] = `token ${tokenResponse.data.access_token;}`;
                 
                 axios({
                   method: 'get',
