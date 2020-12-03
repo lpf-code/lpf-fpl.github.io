@@ -31,7 +31,7 @@
                     }
                 });
                 
-                axios.defaults.headers.common['Authorization'] = `token ${tokenResponse.data.access_token;}`;
+                axios.defaults.headers.common['Authorization'] = `token ${tokenResponse.data.access_token}`;
                 
                 axios({
                   method: 'get',
