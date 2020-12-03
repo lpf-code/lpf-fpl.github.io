@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://libs.cdnjs.net/zepto/0.0.2/zepto.min.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    </head>
+    <body>
+        <script>
+            $(function() {
+                function getQueryParam() {
+                    return location.search.slice(1) &&   location.search.slice(1).split("&").reduce(function(t, v){ var arr = v.split("="); t[arr[0]] = arr[1]; return t}, {})
+                }
+                var code = getQueryParam().code
+
+                axios.defaults.baseURL = 'https://api.example.com';
+                axios.defaults.headers.common['Authorization'] = `token ${code}`;
+                axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8"';
+
+                const result = await axios({
+                  method: 'get',
+                  url: `https://api.github.com/user`,
+                });
+            })
+        </script>
+    </body>
+</html>
